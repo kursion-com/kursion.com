@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>Kursion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    a:link {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .box {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 50%;
+      font-family: Ubuntu;
+      font-weight: 100;
+      font-size: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="element" class="box"></div>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    var typed = new Typed('#element', {
+      strings: ['Did you mean: <i><a href="https://kursion.com">kursion.com</a></i>?', 'Mission to the future!', 'Coming soon...'],
+      typeSpeed: 50,
+      loop: true,
+      showCursor: false,
+      backDelay: 2000,
+    });
+  </script>
+</body>
+
+</html>
