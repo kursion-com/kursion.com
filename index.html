@@ -45,7 +45,7 @@
     }
 
     .terminal-font {
-      font-family: 'Fira Code', monospace;
+      font-family: 'Fira+Code', monospace;
     }
 
     #animated-bg {
@@ -174,9 +174,8 @@
 
   <div id="animated-bg"></div>
 
-  <!-- Top Bar (Initially Hidden) -->
-  <header id="top-bar"
-    class="w-full fixed top-0 left-0 p-4 z-10 frosted-glass opacity-0 -translate-y-full transition-all duration-500 ease-in-out">
+  <!-- Top Bar (Now always visible) -->
+  <header id="top-bar" class="w-full fixed top-0 left-0 p-4 z-10 frosted-glass">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-2 cursor-pointer" onclick="runCommand('home')">
         <svg viewBox="0 0 100 100" class="w-6 h-6">
@@ -204,7 +203,7 @@
   </header>
 
   <!-- Main Container -->
-  <div id="main-container" class="flex-grow flex flex-col justify-center pb-8 px-4 w-full">
+  <div id="main-container" class="flex-grow flex flex-col pt-24 pb-8 px-4 w-full">
     <!-- Command Bar -->
     <div id="command-bar" class="w-full max-w-2xl mx-auto mb-8 relative z-20 opacity-0 transition-opacity duration-500">
       <div class="command-bar-container rounded-lg flex items-center p-1">
@@ -338,10 +337,7 @@
 
     const finalizeRestore = () => {
       systemState.restored = true;
-      topBar.classList.remove('opacity-0', '-translate-y-full');
-      mainContainer.classList.remove('justify-center');
-      mainContainer.classList.add('pt-24');
-
+      // The main container and top bar are already in their correct final state.
       commandInput.placeholder = 'Type a command or search...';
       commandBar.classList.remove('opacity-0');
 
@@ -372,9 +368,10 @@
       });
       Object.assign(commands, {'help': {}, 'about': {}, 'services': {}, 'portfolio': {}, 'contact': {}, 'theme': {}});
 
+      mainContainer.classList.remove('justify-center');
       updateMainContent('crash');
       setTimeout(() => {
-        showChatAgentMessage("Psst... It looks like our devs broke the deployment. I can give you superuser access to fix it, but don't tell anyone. All you need to do is type 'kursion init' and it should hopefully work.");
+        showChatAgentMessage("Psst... Looks like our devs broke the deployment. I can give you superuser access to fix it, but don't tell anyone. Try typing 'kursion init' and it should hopefully work.");
         commandBar.classList.remove('opacity-0');
         commandInput.focus();
       }, 2000);
