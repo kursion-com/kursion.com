@@ -1,76 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kursion</title>
+  <title>Kursion - AI, DevOps, and Software Engineering Consultancy</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #000;
-      --bg-secondary-opaque: #111;
-      --bg-secondary-translucent: rgba(17, 17, 17, 0.5);
-      --text-primary: #fff;
-      --text-secondary: #888;
-      --border: #333;
-      --accent: #0070f3;
-      --accent-glow: rgba(0, 112, 243, 0.3);
-      --brand-green: #3fb950;
-      --error-red: #f85149;
-    }
-
-    body.light {
-      --bg: #f9f9f9;
-      --bg-secondary-opaque: #fff;
-      --bg-secondary-translucent: rgba(255, 255, 255, 0.6);
-      --text-primary: #000;
-      --text-secondary: #666;
-      --border: #eaeaea;
-    }
-
-    /* Initial state is theme-aware */
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-secondary-opaque);
-      color: var(--text-primary);
-      transition: background-color 0.5s ease;
-    }
-
-    body.restored {
-      background-color: var(--bg);
-    }
-
-    .terminal-font {
-      font-family: 'Fira+Code', monospace;
-    }
-
-    #animated-bg {
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background: linear-gradient(125deg, #000000, #0a0a1a, #000000, #0a1a0a);
-      background-size: 400% 400%;
-      animation: gradientAnimation 20s ease infinite;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    body.light #animated-bg {
-      background: linear-gradient(125deg, #ffffff, #f0f5ff, #ffffff, #f0fff0);
-    }
-
-    body.restored #animated-bg {
-      opacity: 1;
-    }
-
-    @keyframes gradientAnimation {
+    @keyframes animateGradient {
       0% {
         background-position: 0% 50%;
       }
@@ -84,299 +22,285 @@
       }
     }
 
-    #main-content::-webkit-scrollbar {
-      width: 8px;
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #E2E8F0;
+      /* slate-200 */
+      /* Toned down the gradient to be more subtle */
+      background: linear-gradient(-45deg, #020617, #0f172a, #020617, #111827);
+      background-size: 400% 400%;
+      animation: animateGradient 20s ease infinite;
     }
 
-    #main-content::-webkit-scrollbar-track {
-      background: transparent;
+    .section-glow {
+      background-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(124, 58, 237, 0.05), transparent);
     }
 
-    #main-content::-webkit-scrollbar-thumb {
-      background-color: var(--border);
-      border-radius: 4px;
+    .card-glow:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(124, 58, 237, 0.15);
+      border-color: rgba(124, 58, 237, 0.4);
     }
 
-    .frosted-glass {
-      background-color: var(--bg-secondary-translucent);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
+    .text-gradient {
+      background: -webkit-linear-gradient(45deg, #A78BFA, #F472B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .command-bar-container {
-      background-color: var(--bg-secondary-opaque);
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
-    }
-
-    .command-bar-container:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 0 20px 5px var(--accent-glow);
-    }
-
-    #command-input {
-      color: var(--text-primary);
-    }
-
-    #command-input::placeholder {
-      color: var(--text-secondary);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    /* Chat Agent Chip Styles */
-    #chat-agent-container {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 50;
-    }
-
-    #chat-chip {
-      transform-origin: bottom right;
-      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-    }
-
-    @keyframes pulse-green {
-
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7);
-      }
-
-      70% {
-        box-shadow: 0 0 0 10px rgba(63, 185, 80, 0);
-      }
-    }
-
-    .agent-avatar-dot {
-      animation: pulse-green 2s infinite;
+    .header-bg {
+      background-color: rgba(2, 6, 23, 0.7);
+      /* slate-950 with transparency */
     }
   </style>
 </head>
 
-<body class="w-full h-screen overflow-hidden flex flex-col">
+<body class="text-slate-200">
 
-  <div id="animated-bg"></div>
-
-  <!-- Top Bar (Now always visible) -->
-  <header id="top-bar" class="w-full fixed top-0 left-0 p-4 z-10 frosted-glass">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="flex items-center gap-2 cursor-pointer" onclick="runCommand('home')">
-        <svg viewBox="0 0 100 100" class="w-6 h-6">
-          <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#3fb950" />
-              <stop offset="100%" stop-color="#0070f3" />
-            </linearGradient>
-          </defs>
-          <path d="M 20,50 L 35,35 L 50,50 L 35,65 Z M 50,50 L 65,35 L 80,50 L 65,65 Z" fill="url(#g)" />
-        </svg>
-        <span class="font-bold text-lg text-[var(--text-primary)]">Kursion</span>
-      </div>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-[var(--text-secondary)]">
-        <a href="#" class="hover:text-[var(--text-primary)]"
-          onclick="event.preventDefault();runCommand('about')">About</a>
-        <a href="#" class="hover:text-[var(--text-primary)]"
-          onclick="event.preventDefault();runCommand('services')">Services</a>
-        <a href="#" class="hover:text-[var(--text-primary)]"
-          onclick="event.preventDefault();runCommand('portfolio')">Portfolio</a>
-        <a href="#" class="hover:text-[var(--text-primary)]"
-          onclick="event.preventDefault();runCommand('contact')">Contact</a>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 header-bg backdrop-blur-sm border-b border-slate-800/50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold tracking-tighter">
+        kursion<span class="text-violet-400">.</span>
+      </a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#services" class="text-slate-300 hover:text-white transition-colors duration-300">Services</a>
+        <a href="#about" class="text-slate-300 hover:text-white transition-colors duration-300">About Us</a>
+        <a href="#contact"
+          class="bg-slate-100 text-slate-900 px-4 py-2 rounded-md font-semibold hover:bg-white transition-colors duration-300">Contact</a>
       </nav>
+      <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+      <a href="#services" class="block py-2 text-slate-300 hover:text-white">Services</a>
+      <a href="#about" class="block py-2 text-slate-300 hover:text-white">About Us</a>
+      <a href="#contact"
+        class="block mt-2 bg-slate-100 text-slate-900 px-4 py-2 rounded-md font-semibold text-center">Contact</a>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <div id="main-container" class="flex-grow flex flex-col pt-24 pb-8 px-4 w-full">
-    <!-- Command Bar -->
-    <div id="command-bar" class="w-full max-w-2xl mx-auto mb-8 relative z-20 opacity-0 transition-opacity duration-500">
-      <div class="command-bar-container rounded-lg flex items-center p-1">
-        <svg id="command-icon" class="w-5 h-5 text-[var(--text-secondary)] mx-3" fill="none" stroke="currentColor"
-          viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
-        </svg>
-        <input type="text" id="command-input" class="w-full bg-transparent text-lg p-2 outline-none"
-          placeholder="Type a command...">
+  <main class="pt-24">
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden py-20 md:py-32">
+      <div class="container mx-auto px-6 relative text-center">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4 leading-tight">
+          Engineering the Future<br> with <span class="text-gradient">Intelligent Systems</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-8">
+          We are a collective of deeply passionate technologists specializing in AI, DevOps, and custom software. We
+          don't just use technology—we live, breathe, and build it from the ground up.
+        </p>
+        <a href="#contact"
+          class="bg-violet-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-violet-500 transition-all duration-300 transform hover:scale-105">
+          Start a Project
+        </a>
       </div>
-    </div>
-    <!-- Main Content Display -->
-    <main id="main-content" class="flex-grow w-full overflow-y-auto"></main>
-  </div>
+    </section>
 
-  <!-- Chat Agent -->
-  <div id="chat-agent-container" class="hidden">
-    <div id="chat-chip"
-      class="flex items-center gap-3 bg-[var(--bg-secondary-opaque)] border border-[var(--border)] text-[var(--text-primary)] p-3 rounded-lg shadow-xl max-w-sm transform scale-0 opacity-0">
-      <div class="w-3 h-3 bg-[var(--brand-green)] rounded-full flex-shrink-0 agent-avatar-dot"></div>
-      <p id="chat-text" class="text-sm"></p>
-    </div>
-  </div>
+    <!-- Services Section -->
+    <section id="services" class="py-20 md:py-28">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Our Expertise</h2>
+          <p class="text-slate-400 mt-2 text-lg">We architect and build robust, scalable, and intelligent solutions.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- AI & Machine Learning Card -->
+          <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 card-glow transition-all duration-300">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400">
+                <path d="M12 8V4H8" />
+                <rect x="4" y="8" width="8" height="12" rx="2" />
+                <path d="M12 12h4" />
+                <path d="M12 16h4" />
+                <path d="M20 12h-4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-white">AI & Machine Learning</h3>
+            <p class="text-slate-400">We specialize in leveraging and integrating cutting-edge AI, including Large
+              Language Models (LLMs), to solve your most complex challenges.</p>
+          </div>
+          <!-- DevOps & Infrastructure Card -->
+          <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 card-glow transition-all duration-300">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400">
+                <path d="M12 12v-2a2 2 0 1 1 4 0v2" />
+                <path d="M14 12h-4a2 2 0 1 0 0 4h4a2 2 0 1 0 0-4Z" />
+                <path d="M18 18v-2a2 2 0 1 0-4 0v2" />
+                <path d="M12 12V10a2 2 0 1 0-4 0v2" />
+                <path d="M6 6v2a2 2 0 1 0 4 0V6" />
+                <path d="M10 6H6a2 2 0 1 0 0-4h4a2 2 0 1 0 0 4Z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-white">DevOps & Infrastructure</h3>
+            <p class="text-slate-400">We build and manage resilient, automated infrastructure on any cloud, ensuring
+              your applications are reliable, scalable, and secure.</p>
+          </div>
+          <!-- Custom Software Engineering Card -->
+          <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 card-glow transition-all duration-300">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-white">Software Engineering</h3>
+            <p class="text-slate-400">Crafting high-performance, bespoke applications and APIs tailored precisely to
+              your business needs, from backend to frontend.</p>
+          </div>
+          <!-- Security Consulting Card -->
+          <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 card-glow transition-all duration-300">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-white">Security Consulting</h3>
+            <p class="text-slate-400">Integrating security into the core of your development lifecycle. We help you
+              build defensible systems from the start, not as an afterthought.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- About Us Section -->
+    <section id="about" class="py-20 md:py-28">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">We Are Builders at Heart</h2>
+          <p class="text-slate-400 mt-2 text-lg">Our philosophy is simple: understand the fundamentals, master the
+            tools.</p>
+        </div>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div class="prose prose-invert prose-lg text-slate-300">
+            <p>
+              Kursion was founded by engineers who love building things. For us, technology isn't just a career; it's a
+              craft. We thrive on dissecting complex problems and engineering elegant, efficient solutions. Our strength
+              lies not in a checklist of technologies, but in our deep, foundational understanding of how systems
+              interconnect.
+            </p>
+            <p>
+              While our company is new, our team's experience is vast, spanning nearly a decade of successful,
+              high-stakes projects across multiple industries. We've been at the forefront of technological waves, and
+              we bring that battle-tested wisdom to every project. We are the team you call when you need more than just
+              developers—you need technology partners who can see the big picture and master the small details.
+            </p>
+          </div>
+          <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 space-y-4">
+            <div class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400 mr-4 mt-1 flex-shrink-0">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                </path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-white">Deep Integration</h4>
+                <p class="text-slate-400">We specialize in making disparate systems speak the same language, creating
+                  seamless, powerful integrations.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400 mr-4 mt-1 flex-shrink-0">
+                <path d="m12 14 4-4" />
+                <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+              </svg>
+              <div>
+                <h4 class="font-semibold text-white">Performance Obsessed</h4>
+                <p class="text-slate-400">Every line of code and piece of infrastructure is optimized for speed,
+                  efficiency, and scalability.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-violet-400 mr-4 mt-1 flex-shrink-0">
+                <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
+                <path d="M8 16.25V22l4-4 4 4v-5.75"></path>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-white">Future-Proof Architecture</h4>
+                <p class="text-slate-400">We build solutions that last, designed with foresight to adapt to tomorrow's
+                  challenges.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32 section-glow">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white">Ready to Build?</h2>
+        <p class="text-slate-400 mt-4 mb-8 text-lg max-w-2xl mx-auto">
+          We're excited to hear about your project. Reach out and let's discuss how we can bring your vision to life.
+        </p>
+        <div class="inline-block bg-slate-900/70 border border-slate-800 rounded-lg p-6">
+          <a href="mailto:contact@kursion.com"
+            class="text-2xl font-semibold text-white hover:text-violet-300 transition-colors duration-300">
+            contact@kursion.com
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/50">
+    <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+      <p>&copy; 2025 Kursion. All rights reserved.</p>
+      <p class="text-sm mt-2">Architected with passion. Engineered with precision.</p>
+    </div>
+  </footer>
 
   <script>
-    const commandInput = document.getElementById('command-input');
-    const mainContent = document.getElementById('main-content');
-    const topBar = document.getElementById('top-bar');
-    const commandBar = document.getElementById('command-bar');
-    const mainContainer = document.getElementById('main-container');
-    const chatContainer = document.getElementById('chat-agent-container');
-    const chatChip = document.getElementById('chat-chip');
-    const chatText = document.getElementById('chat-text');
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    let commandHistory = [];
-    let systemState = {restored: false};
-
-    const initialContent = {
-      'crash': `<div class="w-full h-full flex items-center justify-center text-center"><div class="terminal-font"><h1 class="text-2xl font-bold text-[var(--text-primary)]">500 Internal Server Error</h1><p class="text-[var(--text-secondary)] mt-2">The server encountered an internal error and was unable to complete your request.</p></div></div>`,
-      'restore_sequence': `
-                <div class="max-w-3xl mx-auto terminal-font text-lg p-4 text-left">
-                    <p>&gt; Executing <span class="text-[var(--brand-green)]">kursion init</span>...</p>
-                    <p id="restore-step-1" class="opacity-0 transition-opacity duration-500">&gt; Bypassing server handshake... <span class="text-[var(--brand-green)]">OK</span></p>
-                    <p id="restore-step-2" class="opacity-0 transition-opacity duration-500">&gt; Initializing client-side render engine... <span class="text-[var(--brand-green)]">OK</span></p>
-                    <p id="restore-step-3" class="opacity-0 transition-opacity duration-500">&gt; Syncing content delivery network... <span class="text-[var(--brand-green)]">OK</span></p>
-                    <p id="restore-step-4" class="opacity-0 transition-opacity duration-500">&gt; Loading animation subsystems... <span class="text-[var(--brand-green)]">OK</span></p>
-                    <p id="restore-step-5" class="opacity-0 transition-opacity duration-500 font-bold text-white">&gt; System Restore Complete.</p>
-                </div>`,
-      'welcome': `<div class="flex flex-col items-center justify-center h-full text-center"><h1 class="text-5xl md:text-7xl font-bold mt-4 bg-clip-text text-transparent" style="background-image: linear-gradient(to right, var(--text-primary), var(--text-secondary));">Code is Craft.</h1><p class="mt-4 text-lg max-w-2xl" style="color: var(--text-secondary)">We don't just build, we architect. We don't just code, we create.</p><div class="mt-8 flex flex-wrap justify-center gap-3"><button class="frosted-glass py-2 px-4 rounded-lg hover:border-[#444] text-[var(--text-primary)]" onclick="runCommand('portfolio')">Explore Our Work</button></div></div>`,
-    };
-
-    const visualContent = { /* Populated in window.onload */};
-    const commands = { /* Populated in window.onload */};
-
-    const updateMainContent = (content, isRaw = false) => {
-      mainContent.innerHTML = isRaw ? content : `<div class="fade-in max-w-5xl mx-auto p-4">${visualContent[content] || initialContent[content]}</div>`;
-      mainContent.scrollTop = 0;
-    };
-
-    const showChatAgentMessage = (message, duration = 0) => {
-      chatContainer.classList.remove('hidden');
-      chatText.textContent = message;
-      setTimeout(() => {
-        chatChip.classList.remove('scale-0', 'opacity-0');
-      }, 100);
-
-      if (duration > 0) {
-        setTimeout(hideChatAgent, duration);
-      }
-    };
-
-    const hideChatAgent = () => {
-      chatChip.classList.add('scale-0', 'opacity-0');
-      setTimeout(() => chatContainer.classList.add('hidden'), 300);
-    }
-
-    const runCommand = (cmd) => {
-      commandInput.value = cmd;
-      executeCommand(cmd);
-    };
-
-    const executeCommand = (cmd) => {
-      cmd = cmd.toLowerCase().trim();
-      if (!cmd) return;
-
-      if (!systemState.restored) {
-        if (cmd === 'kursion init') {
-          commandInput.value = '';
-          handleRecovery();
-        }
-        return;
-      }
-
-      if (commandHistory[0] !== cmd) commandHistory.unshift(cmd);
-
-      if (commands[cmd]) {
-        if (cmd === 'theme') document.body.classList.toggle('light');
-        else updateMainContent(cmd);
-      } else if (cmd === 'clear' || cmd === 'home') {
-        updateMainContent('welcome');
-      } else {
-        updateMainContent('help');
-      }
-
-      commandInput.value = '';
-    };
-
-    const handleRecovery = () => {
-      hideChatAgent();
-      commandBar.classList.add('opacity-0');
-      mainContent.classList.add('opacity-0');
-
-      setTimeout(() => {
-        document.body.classList.add('restored');
-        document.title = 'Kursion :: Tech Consultancy';
-        updateMainContent('restore_sequence', true);
-        mainContent.classList.remove('opacity-0');
-
-        let delay = 500;
-        for (let i = 1; i <= 5; i++) {
-          setTimeout(() => {
-            const step = document.getElementById(`restore-step-${i}`);
-            if (step) step.classList.remove('opacity-0');
-          }, delay);
-          delay += 400;
-        }
-        setTimeout(finalizeRestore, delay);
-      }, 500);
-    };
-
-    const finalizeRestore = () => {
-      systemState.restored = true;
-      // The main container and top bar are already in their correct final state.
-      commandInput.placeholder = 'Type a command or search...';
-      commandBar.classList.remove('opacity-0');
-
-      updateMainContent('welcome');
-      showChatAgentMessage("You did it! System restored. Thanks for the help! Feel free to look around. I'm keeping your superuser access for now ;)", 5000);
-    };
-
-    const applyInitialTheme = () => {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (!prefersDark) {
-        document.body.classList.add('light');
-      }
-    };
-
-    commandInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {e.preventDefault(); executeCommand(commandInput.value);}
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
 
-    window.onload = () => {
-      applyInitialTheme();
-
-      Object.assign(visualContent, {
-        'help': `<h1 class="text-4xl font-bold text-[var(--text-primary)]">Available Commands</h1><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"><div class="frosted-glass p-4 rounded-lg"><code class="text-lg text-[var(--accent)]">about</code></div><div class="frosted-glass p-4 rounded-lg"><code class="text-lg text-[var(--accent)]">services</code></div><div class="frosted-glass p-4 rounded-lg"><code class="text-lg text-[var(--accent)]">portfolio</code></div><div class="frosted-glass p-4 rounded-lg"><code class="text-lg text-[var(--accent)]">contact</code></div></div>`,
-        'about': `<h1 class="text-4xl font-bold text-[var(--text-primary)]">Our Philosophy</h1><div class="bento-grid mt-8"><div class="bento-item-1 frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">Code is Craft</h2><p class="mt-2 text-[var(--text-secondary)]">We believe that writing software is a craft, requiring artistry, foresight, and a dedication to quality.</p></div><div class="bento-item-2 frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">Deep Understanding</h2><p class="mt-2 text-[var(--text-secondary)]">We're captivated by challenges and love understanding systems from the bare metal to the UI.</p></div><div class="bento-item-3 frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">Your Vision, Amplified</h2><p class="mt-2 text-[var(--text-secondary)]">We partner with you to translate your vision into robust, scalable technology.</p></div></div>`,
-        'services': `<h1 class="text-4xl font-bold text-[var(--text-primary)]">Our Expertise</h1><div class="mt-8 space-y-6"><div class="frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">Artificial Intelligence & ML</h2></div><div class="frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">Bespoke Software Engineering</h2></div><div class="frosted-glass p-6 rounded-lg"><h2 class="text-2xl font-bold">DevOps & Cloud Infrastructure</h2></div></div>`,
-        'portfolio': `<h1 class="text-4xl font-bold text-[var(--text-primary)]">Our Work</h1><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"><a href="#" class="frosted-glass card-link p-6 rounded-lg block" onclick="event.preventDefault(); runCommand('portfolio -sentinel')"><h3 class="text-xl font-bold">Sentinel: AI Threat Detection</h3></a><a href="#" class="frosted-glass card-link p-6 rounded-lg block" onclick="event.preventDefault(); runCommand('portfolio -nexus')"><h3 class="text-xl font-bold">Nexus: Scalable E-Commerce</h3></a><a href="#" class="frosted-glass card-link p-6 rounded-lg block" onclick="event.preventDefault(); runCommand('portfolio -cascade')"><h3 class="text-xl font-bold">Cascade: Automated CI/CD</h3></a></div>`,
-        'contact': `<h1 class="text-4xl font-bold text-[var(--text-primary)]">Contact Us</h1><div class="mt-8 frosted-glass p-8 rounded-lg max-w-lg mx-auto text-center"><p class="mt-4 text-2xl"><a href="mailto:hello@kursion.io" class="text-[var(--accent)] hover:underline">hello@kursion.io</a></p></div>`,
+    // Close mobile menu when a link is clicked
+    const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+    for (let link of mobileMenuLinks) {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
       });
-      Object.assign(commands, {'help': {}, 'about': {}, 'services': {}, 'portfolio': {}, 'contact': {}, 'theme': {}});
+    }
 
-      mainContainer.classList.remove('justify-center');
-      updateMainContent('crash');
-      setTimeout(() => {
-        showChatAgentMessage("Psst... Looks like our devs broke the deployment. I can give you superuser access to fix it, but don't tell anyone. Try typing 'kursion init' and it should hopefully work.");
-        commandBar.classList.remove('opacity-0');
-        commandInput.focus();
-      }, 2000);
-    };
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
+
 </body>
 
 </html>
